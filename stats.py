@@ -1,23 +1,20 @@
-def get_num_words(contents):
-    words = contents.split()
+def get_num_words(text):
+    words = text.split()
     return len(words)
 
 
-def get_num_chars(contents):
-    lower = contents.lower()
-    chars = list(lower)
-    counts = dict()
-    seen = set()
-    duplicates = []
-    char_list = []
-    for char in chars:
-        char_list.append(char)
-    for char in char_list:
-        if char in seen:
-            duplicates.append(char)
+def get_num_chars(text):
+    lower = text.lower()
+    chars = {}
+    for char in lower:
+        chars[char] = chars.get(char, 0) + 1
+
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
         else:
-            seen.add(char)
-    for char in duplicates:
-        if char in seen:
-            counts[char] = counts.get(char, 1) + 1
-    return counts
+            chars[lowered] = 1
+    return chars
